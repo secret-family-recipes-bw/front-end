@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RecipeCard from "./RecipeCard";
+
 
 
 
@@ -10,7 +10,7 @@ function RecipeList({ recipes }) {
       {
         recipes.map(recipe => (
           <Link key={recipe.id} to={`/recipes/${recipe.id}`}>
-            <RecipeCard recipe={recipe} />
+            <h2>{recipe.title}</h2>
           </Link>
         ))
       }

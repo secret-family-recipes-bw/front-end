@@ -4,25 +4,25 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import recipeData from "../FakeData/recipeData";
 
-function Recipe({ addToSavedList }) {
-  const [recipe, setRecipe] = useState(recipeData);
+function Recipe({ addToSavedList, recipes }) {
   const { push } = useHistory();
-  const params = useParams();
+  const { id } = useParams();
+  const recipe = recipes.find(recipe => recipe.id == id);
 
-  const fetchRecipe = (id) => {
-    axios
-      .get(`http://localhost:5000/api/movies/${id}`)
-      .then((res) => setRecipe(res.data))
-      .catch((err) => console.log(err.response));
-  };
+//   const fetchRecipe = (id) => {
+//     axios
+//       .get(`http://localhost:5000/api/movies/${id}`)
+//       .then((res) => setRecipe(res.data))
+//       .catch((err) => console.log(err.response));
+//   };
 
   const saveRecipe = () => {
     addToSavedList(recipe);
   };
 
-  useEffect(() => {
-    fetchRecipe(params.id);
-  }, [params.id]);
+//   useEffect(() => {
+//     fetchRecipe(params.id);
+//   }, [params.id]);
 
   if (!recipe) {
     return <div>Loading recipe information...</div>;

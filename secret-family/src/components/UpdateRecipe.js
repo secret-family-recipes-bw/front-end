@@ -11,24 +11,24 @@ const initialRecipe = {
 
 const UpdateRecipe = () => {
   const location = useLocation();
-  const params = useParams();
+//   const params = useParams();
   const { push } = useHistory();
   const [recipe, setRecipe] = useState(initialRecipe);
 
 
-  useEffect(() => {
-    if (location.state) {
-      setRecipe(location.state);
-    } else {
-      axios
-        .get(`http://localhost:5000/api/movies/${params.id}`)
-        .then(res => {
-            console.log("data", res.data) 
-            setRecipe(res.data)
-        })
-        .catch(err => console.log(err));
-    }
-  }, []);
+//   useEffect(() => {
+//     if (location.state) {
+//       setRecipe(location.state);
+//     } else {
+    //   axios
+        // .get(`http://localhost:5000/api/movies/${params.id}`)
+        // .then(res => {
+        //     console.log("data", res.data) 
+        //     setRecipe(res.data)
+        // })
+        // .catch(err => console.log(err));
+//     }
+//   }, []);
 
   const changeHandler = ev => {
     ev.persist();
@@ -42,10 +42,10 @@ const UpdateRecipe = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios
-      .put(`http://localhost:5000/api/movies/${recipe.id}`, recipe)
-      .then(() => push("/"))
-      .catch(err => console.log(err));
+    // axios
+    //   .put(`http://localhost:5000/api/movies/${recipe.id}`, recipe)
+    //   .then(() => push("/"))
+    //   .catch(err => console.log(err));
   };
 
   return (

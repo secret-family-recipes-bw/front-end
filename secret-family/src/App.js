@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, useHistory } from "react-router-dom";
+import { Route, useHistory, useParams } from "react-router-dom";
 import SavedList from "./components/SavedList";
 import RecipeList from "./components/RecipesList";
 import Recipe from "./components/Recipe";
@@ -7,10 +7,12 @@ import UpdateRecipe from "./components/UpdateRecipe";
 import recipeData from "./FakeData/recipeData";
 import axios from 'axios';
 
+
 const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [recipeList, setRecipeList] = useState(recipeData);
-
+ 
+ 
   const { location } = useHistory();
 
   const getRecipeList = () => {
@@ -37,8 +39,8 @@ const App = () => {
       </Route>
 
       <Route
-        path="/movies/:id"
-        render={props => <Recipe {...props} addToSavedList={addToSavedList} />}
+        path="/recipes/:id"
+        render={props => <Recipe {...props} recipes={recipeList} addToSavedList={addToSavedList} />}
       />
 
       <Route
