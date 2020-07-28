@@ -9,9 +9,9 @@ const initialRecipe = {
     image: "",
 };
 
-const UpdateRecipe = () => {
+const AddRecipe = () => {
 //   const params = useParams();
-  const { push } = useHistory();
+  const { push, location } = useHistory();
   const [recipe, setRecipe] = useState(initialRecipe);
 
 
@@ -49,7 +49,7 @@ const UpdateRecipe = () => {
 
   return (
     <div>
-      <h2>Update Recipe</h2>
+      <h2>Add Recipe</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -72,10 +72,10 @@ const UpdateRecipe = () => {
           placeholder="Instructions"
           value={recipe.instructions}
         />
-        <button>Update</button>
+        <button>Submit</button>
       </form>
     </div>
   );
 };
 
-export default UpdateRecipe;
+export default AddRecipe;
