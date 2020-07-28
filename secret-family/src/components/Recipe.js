@@ -4,10 +4,11 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import recipeData from "../FakeData/recipeData";
 
-function Recipe({ addToSavedList, recipes }) {
+function Recipe({ addToSavedList, recipes, isInSavedList, removeFromSavedList }) {
   const { push } = useHistory();
   const { id } = useParams();
   const recipe = recipes.find(recipe => recipe.id == id);
+  const saved = isInSavedList(recipe);
 
 //   const fetchRecipe = (id) => {
 //     axios
@@ -16,8 +17,8 @@ function Recipe({ addToSavedList, recipes }) {
 //       .catch((err) => console.log(err.response));
 //   };
 
-  const saveRecipe = () => {
-    addToSavedList(recipe);
+  const toggleSaveRecipe = () => {
+    saved ? removeFromSavedList(recipe) : addToSavedList(recipe);
   };
 
 //   useEffect(() => {
@@ -42,9 +43,9 @@ function Recipe({ addToSavedList, recipes }) {
     <div className="save-wrapper">
       <RecipeCard recipe={recipe} />
 
-      <div className="save-button" onClick={saveRecipe}>
-        Save
-      </div>
+      <button className="save-button" onClick={toggleSaveRecipe}>
+        {saved ? "remove from saved" : "Save"}
+      </button>
       <button onClick={handleDelete}>
           Delete
       </button>
