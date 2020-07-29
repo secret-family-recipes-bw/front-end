@@ -8,6 +8,8 @@ import recipeData from "./FakeData/recipeData";
 import Search from "./components/Search";
 import axios from 'axios';
 import AddRecipe from "./components/AddRecipe";
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 
 const App = () => {
@@ -20,10 +22,10 @@ const App = () => {
   const { location } = useHistory();
 
   const getRecipeList = () => {
-    // axios
-    //   .get("http://localhost:5000/api/movies")
-    //   .then(res => setRecipeList(res.data))
-    //   .catch(err => console.log(err.response));
+    axios
+      .get("http://localhost:5000/api/movies")
+      .then(res => setRecipeList(res.data))
+      .catch(err => console.log(err.response));
   };
 
   const addToSavedList = recipe => {
@@ -57,7 +59,9 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className="App">
+      <Route path='/signup' component={Signup}></Route>
+      <Route path='/login' component={Login}></Route>
       <SavedList list={savedList} />
 
       <Route exact path="/">
@@ -88,7 +92,7 @@ const App = () => {
         path="/update-movie/:id"
         render={props => <UpdateRecipe {...props} />}
       />
-    </>
+    </div>
   );
 };
 
