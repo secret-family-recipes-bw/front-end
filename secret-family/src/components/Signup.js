@@ -59,20 +59,20 @@ const Signup = props => {
                     Signup
                 </h1>
                 <label htmlFor='username'>
-                    Username:
-                    <input name='username' type='text'onChange={formState}/>
+                    Username:<br />
+                    <input name='username' type='text'onChange={formState}/><br /><br />
                 </label>
                 <label htmlFor='email'>
-                    Email:
-                    <input name='email' type='text' onChange={formState}/>
+                    Email:<br />
+                    <input name='email' type='text' onChange={formState}/><br /><br />
                 </label>
                 <label htmlFor='password'>
-                    Password:
-                    <input name='password' type='text' onChange={formState} secureTextEntry/>
+                    Password:<br />
+                    <input name='password' type='text' onChange={formState} /><br /><br />
                 </label>
                 <label htmlFor='name'>
-                    Name:
-                    <input name='name' type='text' onChange={formState}/>
+                    Name:<br />
+                    <input name='name' type='text' onChange={formState}/><br /><br /><br />
                 </label>
                 <button disabled={disabled}>Signup</button>
             </form>

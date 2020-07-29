@@ -53,12 +53,12 @@ const Login = props => {
                     Login
                 </h1>
                 <label htmlFor='username'>
-                    Username:
-                    <input name='username' type='text' onChange={lFormState}/>
+                    Username:<br />
+                    <input name='username' type='text' onChange={lFormState}/><br /><br />
                 </label>
                 <label htmlFor='password'>
-                    Password:
-                    <input name='password' type='text' onChange={lFormState} secureTextEntry/>
+                    Password:<br />
+                    <input name='password' type='text' onChange={lFormState} /><br /><br /><br />
                 </label>
                 <button disabled={lDisabled}>Login</button>
             </form>
