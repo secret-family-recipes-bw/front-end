@@ -11,9 +11,6 @@ const RecipeCard = props => {
         <div className="recipe-instructions">
             Instructions: <p>{instructions}</p>
         </div>
-        <div>
-            <img src=""/>
-        </div>
     </div>
   );
 };
