@@ -50,7 +50,7 @@ function Recipe({ addToSavedList, isInSavedList, removeFromSavedList }) {
       <button onClick={handleDelete}>
           Delete
       </button>
-      <Link to={`/update-recipe/${recipe.id}`}>
+      <Link to={`/update-recipe/${recipe.recipe.id}`}>
         <button>Edit</button>
       </Link>
     </div>
