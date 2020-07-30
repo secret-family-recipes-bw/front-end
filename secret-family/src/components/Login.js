@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import loginSchema from './LoginSchema';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -25,6 +26,7 @@ const LButton = styled.button`
 
 const Login = props => {
 
+    const { push } = useHistory();
     const [ validLForm, setValidLForm ] = useState({
         username:'',
         password:''
@@ -49,6 +51,7 @@ const Login = props => {
         .then(res => {
             console.log(res.data)
             window.localStorage.setItem('token', res.data.token)
+            push("/")
 
         })
     }
