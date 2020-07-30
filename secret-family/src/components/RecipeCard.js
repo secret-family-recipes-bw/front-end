@@ -1,15 +1,23 @@
 import React from 'react';
 
 const RecipeCard = props => {
-  const { title, ingredients, instructions, image } = props.recipe;
+  const { recipe, ingredients, instructions } = props.recipe;
   return (
     <div className="recipe-card">
-        <h2>{title}</h2>
+        <h2>{recipe.title}</h2>
         <div className="recipe-ingredients">
-            Ingredients: <p>{ingredients}</p>
+            <h3>Ingredients:</h3> 
+            {/* <p>{ingredients}</p> */}
         </div>
         <div className="recipe-instructions">
-            Instructions: <p>{instructions}</p>
+            <h3>Instructions:</h3> 
+            <ol>
+                { instructions.map(instruction => {
+                    return (
+                        <li key={instruction.step_number}>{instruction.step}</li>
+                    )
+                })}
+            </ol>
         </div>
     </div>
   );
