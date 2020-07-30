@@ -3,11 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const initialRecipe = {
+    user_id: 1,
     title: "", 
-    ingredients: "",
-    instructions: "",
+    source: "",
+    category: "",
     image: "",
 };
+
 
 const UpdateRecipe = () => {
   const { id } = useParams();
@@ -35,14 +37,18 @@ const UpdateRecipe = () => {
 
     setRecipe({
       ...recipe,
-      [ev.target.name]: value
+      recipe: {
+        ...recipe.recipe,
+        [ev.target.name]: value
+      }
     });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+    console.log(recipe)
     axios
-      .put(`http://localhost:5000/api/movies/${recipe.id}`, recipe)
+      .put(`https://secret-family-recipes-2-api.herokuapp.com/recipes/updaterecipe/${id}`, recipe.recipe)
       .then(() => push("/"))
       .catch(err => console.log(err));
   };
