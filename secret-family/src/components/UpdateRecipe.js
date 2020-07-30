@@ -64,7 +64,7 @@ const UpdateRecipe = () => {
           placeholder="Recipe Name"
           value={recipe.title}
         />
-        <textarea
+        {/* <textarea
           type="text"
           name="ingredients"
           onChange={changeHandler}
@@ -77,7 +77,7 @@ const UpdateRecipe = () => {
           onChange={changeHandler}
           placeholder="Instructions"
           value={recipe.instructions}
-        />
+        /> */}
         <button>Update</button>
       </form>
     </div>
