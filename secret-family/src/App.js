@@ -66,7 +66,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <RecipeContext.Provider value={{filteredRecipes, searchText, savedList, changeSearchText, clearFilter, recipeList, addToSavedList, isInSavedList, removeFromSavedList}}>
+      <RecipeContext.Provider value={{filteredRecipes, searchText, savedList, changeSearchText, clearFilter,
+         recipeList, addToSavedList, isInSavedList, removeFromSavedList}}>
         <Route path='/signup' component={Signup}></Route>
         <Route path='/login' component={Login}></Route>
 
@@ -88,7 +89,7 @@ const App = () => {
         </Route>
 
         <Route path="/update-recipe/:id">
-          <SavedList />
+          <SavedList list={savedList} />
           <UpdateRecipe />
         </Route> 
       </RecipeContext.Provider>
