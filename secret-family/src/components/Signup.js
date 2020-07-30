@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory }  from "react-router-dom";
 import signupSchema from './SignupSchema';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SBackgroundDiv = styled.div`
     background-image: url('https://images.unsplash.com/reserve/EnF7DhHROS8OMEp2pCkx_Dufer%20food%20overhead%20hig%20res.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1957&q=80');
@@ -24,8 +26,14 @@ const SButton = styled.button`
 
 const Signup = props => {
 
+    const { push } = useHistory();
     const submit = e => {
         e.preventDefault();
+        axios.post("https://secret-family-recipes-2-api.herokuapp.com/auth/register", validSForm)
+        .then(res => {
+            window.localStorage.setItem("token", res.data.token)
+            push("/")
+        })
     }
     const [ validSForm, setValidSForm ] = useState({
         username:'',
