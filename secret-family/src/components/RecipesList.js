@@ -16,6 +16,7 @@ const RecipeListDiv = styled.div `
     width: 75%;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: space-between;
 `;
 

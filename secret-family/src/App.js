@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, useHistory, Link } from "react-router-dom";
+import styled from 'styled-components';
+
 import SavedList from "./components/SavedList";
 import RecipeList from "./components/RecipesList";
 import Recipe from "./components/Recipe";
@@ -15,7 +17,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import axiosWithAuth from "./utils/axiosWithAuth";
 import { RecipeContext } from "./context/RecipeContext"
 
-
+const Button = styled.button `
+  font-size: 0.75em;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid black;
+  border-radius: 3px;
+`
 const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
@@ -78,7 +86,7 @@ const App = () => {
           <SavedList />
           <Search />
           <RecipeList />
-          <Link to="/add-recipe"><button>Add Recipe</button></Link>
+          <Link to="/add-recipe"><Button>Add Recipe</Button></Link>
         </PrivateRoute>
 
         <Route path="/add-recipe">
