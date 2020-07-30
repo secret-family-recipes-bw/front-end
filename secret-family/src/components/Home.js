@@ -23,10 +23,11 @@ const Home = () => {
         axiosWithAuth()
           .get("/recipes")
           .then(res => {
+              console.log(res.data)
             updateRecipes(res.data)
           } )
           .catch(err => console.log(err.response));
-      }, [location, updateRecipes]);
+      }, [location]);
 
     return (
         <>

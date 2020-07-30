@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import loginSchema from './LoginSchema';
 import * as yup from 'yup';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import '../index.css';
 import axios from "axios";
 
@@ -78,8 +77,8 @@ const Login = props => {
         e.preventDefault();
         console.log(validLForm)
         
-        axiosWithAuth()
-        .post('/auth/login', validLForm)
+        axios
+        .post('https://secret-family-recipes-2-api.herokuapp.com/auth/login', validLForm)
         .then(res => {
             window.localStorage.setItem('token', res.data.token);
             lHistory.push('/')  
