@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import axios from "axios";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialRecipe = {
     user_id: 1,
@@ -21,7 +21,7 @@ const UpdateRecipe = () => {
     if (location.state) {
       setRecipe(location.state);
     } else {
-      axios
+      axiosWithAuth()
         .get(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${id}`)
         .then(res => {
             console.log("data", res.data) 
@@ -47,7 +47,7 @@ const UpdateRecipe = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(recipe)
-    axios
+    axiosWithAuth()
       .put(`https://secret-family-recipes-2-api.herokuapp.com/recipes/updaterecipe/${id}`, recipe.recipe)
       .then(() => push("/"))
       .catch(err => console.log(err));
