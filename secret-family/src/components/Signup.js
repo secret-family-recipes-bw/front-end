@@ -24,7 +24,7 @@ const SButton = styled.button`
     width: 44%;
 `;
 
-const Signup = props => {
+const Signup = () => {
 
     const { push } = useHistory();
     const submit = e => {
@@ -34,6 +34,7 @@ const Signup = props => {
             window.localStorage.setItem("token", res.data.token)
             push("/")
         })
+        .catch(err => console.log(err))
     }
     const [ validSForm, setValidSForm ] = useState({
         username:'',

@@ -31,18 +31,6 @@ const App = () => {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const { location } = useHistory();
 
-  const getRecipeList = () => {
-    axiosWithAuth()
-      .get("/recipes")
-      .then(res => {
-        console.log(res)
-        setRecipeList(res.data)
-        const recipes = filterRecipes(res.data, searchText)
-        setFilteredRecipes(recipes)
-      } )
-      .catch(err => console.log(err.response));
-  };
-
   const addToSavedList = recipe => {
     setSavedList([...savedList, recipe]);
   };
@@ -52,12 +40,20 @@ const App = () => {
   }
 
   const isInSavedList = recipe => {
-    return recipe && savedList.find(savedRecipe => recipe.recipe.id == savedRecipe.recipe.id) !== undefined;
+    return recipe && savedList.find(savedRecipe => recipe.recipe.id === savedRecipe.recipe.id) !== undefined;
   }
 
   useEffect(() => {
-    getRecipeList();
-  }, [location]);
+    axiosWithAuth()
+      .get("/recipes")
+      .then(res => {
+        console.log(res)
+        setRecipeList(res.data)
+        const recipes = filterRecipes(res.data, searchText)
+        setFilteredRecipes(recipes)
+      } )
+      .catch(err => console.log(err.response));
+  }, [searchText, location]);
 
   const filterRecipes = (recipes, searchText) => {
     console.log("search text kldsjlkfajdkljfsalk", searchText)

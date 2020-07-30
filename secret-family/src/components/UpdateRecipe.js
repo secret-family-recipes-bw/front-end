@@ -29,7 +29,7 @@ const UpdateRecipe = () => {
         })
         .catch(err => console.log(err));
     }
-  }, []);
+  }, [id, location.state]);
 
   const changeHandler = ev => {
     ev.persist();
