@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
+import { RecipeContext } from "../context/RecipeContext";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 
-function Recipe({ addToSavedList, isInSavedList, removeFromSavedList }) {
+function Recipe() {
+    const {addToSavedList, isInSavedList, removeFromSavedList} = useContext(RecipeContext);
   const { push } = useHistory();
   const { id } = useParams();
   const [recipe, setRecipe] = useState();
