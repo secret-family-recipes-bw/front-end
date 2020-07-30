@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const initialRecipe = {
@@ -13,21 +13,21 @@ const AddRecipe = () => {
 //   const params = useParams();
   const { push, location } = useHistory();
   const [recipe, setRecipe] = useState(initialRecipe);
+  const { id } = useParams();
 
-
-//   useEffect(() => {
-//     if (location.state) {
-//       setRecipe(location.state);
-//     } else {
-//       axios
-//         .get(`http://localhost:5000/api/movies/${params.id}`)
-//         .then(res => {
-//             console.log("data", res.data) 
-//             setRecipe(res.data)
-//         })
-//         .catch(err => console.log(err));
-//     }
-//   }, []);
+  useEffect(() => {
+    if (location.state) {
+      setRecipe(location.state);
+    } else {
+      axios
+        .get(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${id}`)
+        .then(res => {
+            console.log("data", res.data) 
+            setRecipe(res.data)
+        })
+        .catch(err => console.log(err));
+    }
+  }, []);
 
   const changeHandler = ev => {
     ev.persist();
@@ -41,10 +41,10 @@ const AddRecipe = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // axios
-    //   .put(`http://localhost:5000/api/movies/${recipe.id}`, recipe)
-    //   .then(() => push("/"))
-    //   .catch(err => console.log(err));
+    axios
+      .put(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${recipe.id}`, recipe)
+      .then(() => push("/"))
+      .catch(err => console.log(err));
   };
 
   return (

@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useHistory, Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
-import recipeData from "../FakeData/recipeData";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
-function Recipe({ addToSavedList, recipes, isInSavedList, removeFromSavedList }) {
+
+function Recipe({ addToSavedList, isInSavedList, removeFromSavedList }) {
   const { push } = useHistory();
   const { id } = useParams();
-  const recipe = recipes.find(recipe => recipe.id == id);
+  const [recipe, setRecipe] = useState();
   const saved = isInSavedList(recipe);
 
-//   const fetchRecipe = (id) => {
-//     axios
-//       .get(`http://localhost:5000/api/movies/${id}`)
-//       .then((res) => setRecipe(res.data))
-//       .catch((err) => console.log(err.response));
-//   };
 
   const toggleSaveRecipe = () => {
     saved ? removeFromSavedList(recipe) : addToSavedList(recipe);
   };
 
-//   useEffect(() => {
-//     fetchRecipe(params.id);
-//   }, [params.id]);
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${id}`)
+      .then((res) => {
+          setRecipe(res.data)
+          console.log("data", res.data)
+        })
+      .catch((err) => console.log(err.response));
+  }, [id]);
 
   if (!recipe) {
     return <div>Loading recipe information...</div>;
@@ -31,9 +31,10 @@ function Recipe({ addToSavedList, recipes, isInSavedList, removeFromSavedList })
 
   const handleDelete = e => {
     e.preventDefault();
-    axios
-      .delete(`http://localhost:5000/api/movies/${recipe.id}`)
-      .then(() => {
+    axiosWithAuth()
+      .delete(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${id}`)
+      .then((res) => {
+          console.log("res for delete:", res)
         push("/");
       })
       .catch(err => console.log(err));
@@ -49,7 +50,7 @@ function Recipe({ addToSavedList, recipes, isInSavedList, removeFromSavedList })
       <button onClick={handleDelete}>
           Delete
       </button>
-      <Link to={`/update-movie/${recipe.id}`}>
+      <Link to={`/update-recipe/${recipe.id}`}>
         <button>Edit</button>
       </Link>
     </div>

@@ -6,13 +6,14 @@ function SavedList({ list }) {
     <div className="saved-list">
       <h3>Saved Recipes:</h3>
       {list.map(recipe => {
+          console.log("title   ldjafsk ", recipe)
         return (
           <NavLink
-            to={`/movies/${recipe.id}`}
-            key={recipe.id}
+            to={`/recipes/${recipe.recipe.id}`}
+            key={recipe.recipe.id}
             activeClassName="saved-active"
           >
-            <span className="saved-movie">{recipe.title}</span>
+            <span className="saved-movie">{recipe.recipe.title}</span>
           </NavLink>
         );
       })}
