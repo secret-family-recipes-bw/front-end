@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import loginSchema from './LoginSchema';
 import * as yup from 'yup';
 import styled from 'styled-components';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import axios from "axios";
 
 const LBackgroundDiv = styled.div`
     background-image: url('https://images.unsplash.com/reserve/EnF7DhHROS8OMEp2pCkx_Dufer%20food%20overhead%20hig%20res.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1957&q=80');
@@ -44,10 +44,11 @@ const Login = props => {
     const lSubmit = e => {
         e.preventDefault();
         
-        axiosWithAuth()
-        .post('/auth/login', validLForm)
+        axios
+        .post('https://secret-family-recipes-2-api.herokuapp.com/auth/login', validLForm)
         .then(res => {
-            window.localStorage.setItem('token')
+            console.log(res.data)
+            window.localStorage.setItem('token', res.data.token)
 
         })
     }
