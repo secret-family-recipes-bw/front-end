@@ -10,6 +10,7 @@ import axios from 'axios';
 import AddRecipe from "./components/AddRecipe";
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Nav from './components/Nav'
 
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Nav />
       <Route path='/signup' component={Signup}></Route>
       <Route path='/login' component={Login}></Route>
       <SavedList list={savedList} />
