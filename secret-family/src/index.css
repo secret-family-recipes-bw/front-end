@@ -5,9 +5,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'Montez';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montez Regular'), local('Montez-Regular'), url(https://fonts.gstatic.com/s/montez/v11/845ZNMk5GoGIX8lW07rf.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.linkText {
+  text-decoration: none;
+  color:'white';
+  font-family: 'Times New Roman';
+  font-size: 1.2rem;
+}
+
+.linkText:visited {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.error {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  color: red;
 }

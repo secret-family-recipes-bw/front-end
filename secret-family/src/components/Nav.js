@@ -10,15 +10,16 @@ const NavBar = styled.nav`
     background: #420D09;
 `;
 const LogoText = styled.h1`
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Montez';
     color: #D4A59A;
+    font-size: 3rem;
+    margin: 0.3%;
 `;
 const NavLinks = styled.div`
     display: flex;
-    width: 20%;
+    width: 18%;
     justify-content: space-between;
 `;
-
 
 const Nav = props => {
     
@@ -44,26 +45,17 @@ const Nav = props => {
                 </a>
                 <NavLink
                     to="/recipes"
-                    style={{
-                        textDecoration: 'none',
-                        color:'#F3E0DC'
-                    }}>
+                    className='linkText'>
                     Recipes
                 </NavLink>
                 <NavLink
                     to="/login"
-                    style={{
-                        textDecoration: 'none',
-                        color:'#F3E0DC'
-                    }}>
+                    className='linkText'>
                     Login
                 </NavLink>
                 <NavLink
                     to="/signup"
-                    style={{
-                        textDecoration: 'none',
-                        color:'#F3E0DC'
-                    }}>
+                    className='linkText'>
                     Register
                 </NavLink>
             </NavLinks>
