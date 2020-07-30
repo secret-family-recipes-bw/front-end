@@ -25,7 +25,7 @@ const App = () => {
 
   const getRecipeList = () => {
     axiosWithAuth()
-      .get("https://secret-family-recipes-2-api.herokuapp.com/recipes")
+      .get("/recipes")
       .then(res => {
         console.log(res)
         setRecipeList(res.data)
