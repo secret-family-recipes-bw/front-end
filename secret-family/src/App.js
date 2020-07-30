@@ -9,6 +9,8 @@ import Search from "./components/Search";
 import AddRecipe from "./components/AddRecipe";
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Nav from './components/Nav'
+
 import PrivateRoute from "./components/PrivateRoute";
 import axiosWithAuth from "./utils/axiosWithAuth";
 import { RecipeContext } from "./context/RecipeContext"
@@ -68,6 +70,7 @@ const App = () => {
     <div className="App">
       <RecipeContext.Provider value={{filteredRecipes, searchText, savedList, changeSearchText, clearFilter,
          recipeList, addToSavedList, isInSavedList, removeFromSavedList}}>
+        <Nav />
         <Route path='/signup' component={Signup}></Route>
         <Route path='/login' component={Login}></Route>
 
