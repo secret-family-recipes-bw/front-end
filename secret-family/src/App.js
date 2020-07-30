@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, useHistory, Link } from "react-router-dom";
+import styled from 'styled-components';
+
 import SavedList from "./components/SavedList";
 import RecipeList from "./components/RecipesList";
 import Recipe from "./components/Recipe";
@@ -15,25 +17,19 @@ import PrivateRoute from "./components/PrivateRoute";
 import axiosWithAuth from "./utils/axiosWithAuth";
 import { RecipeContext } from "./context/RecipeContext"
 
-
+const Button = styled.button `
+  font-size: 0.75em;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid black;
+  border-radius: 3px;
+`
 const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const { location } = useHistory();
-
-  const getRecipeList = () => {
-    axiosWithAuth()
-      .get("https://secret-family-recipes-2-api.herokuapp.com/recipes")
-      .then(res => {
-        console.log(res)
-        setRecipeList(res.data)
-        const recipes = filterRecipes(res.data, searchText)
-        setFilteredRecipes(recipes)
-      } )
-      .catch(err => console.log(err.response));
-  };
 
   const addToSavedList = recipe => {
     setSavedList([...savedList, recipe]);
@@ -44,12 +40,20 @@ const App = () => {
   }
 
   const isInSavedList = recipe => {
-    return recipe && savedList.find(savedRecipe => recipe.recipe.id == savedRecipe.recipe.id) !== undefined;
+    return recipe && savedList.find(savedRecipe => recipe.recipe.id === savedRecipe.recipe.id) !== undefined;
   }
 
   useEffect(() => {
-    getRecipeList();
-  }, [location]);
+    axiosWithAuth()
+      .get("/recipes")
+      .then(res => {
+        console.log(res)
+        setRecipeList(res.data)
+        const recipes = filterRecipes(res.data, searchText)
+        setFilteredRecipes(recipes)
+      } )
+      .catch(err => console.log(err.response));
+  }, [searchText, location]);
 
   const filterRecipes = (recipes, searchText) => {
     console.log("search text kldsjlkfajdkljfsalk", searchText)
@@ -78,7 +82,7 @@ const App = () => {
           <SavedList />
           <Search />
           <RecipeList />
-          <Link to="/add-recipe"><button>Add Recipe</button></Link>
+          <Link to="/add-recipe"><Button>Add Recipe</Button></Link>
         </PrivateRoute>
 
         <Route path="/add-recipe">

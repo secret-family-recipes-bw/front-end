@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialRecipe = {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import loginSchema from './LoginSchema';
 import * as yup from 'yup';
 import styled from 'styled-components';
-import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import '../index.css';
+import axios from "axios";
+
 
 const LBackgroundDiv = styled.div`
     background-image: url('https://images.unsplash.com/reserve/EnF7DhHROS8OMEp2pCkx_Dufer%20food%20overhead%20hig%20res.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1957&q=80');
@@ -32,7 +34,7 @@ const LButton = styled.button`
 const Login = props => {
 
     const lHistory = useHistory();
-
+ 
     const [ validLForm, setValidLForm ] = useState({
         username:'',
         password:''
@@ -42,6 +44,7 @@ const Login = props => {
         password:''
     })
     const [ lDisabled, setLDisabled ] = useState(false);
+
 
     const lFormState = e => {
         const lName = e.target.name;
