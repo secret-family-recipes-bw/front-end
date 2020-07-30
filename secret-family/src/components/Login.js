@@ -45,9 +45,10 @@ const Login = props => {
         e.preventDefault();
         
         axiosWithAuth()
-        .post('/api', validLForm)
+        .post('/auth/login', validLForm)
         .then(res => {
-            
+            window.localStorage.setItem('token')
+
         })
     }
 
