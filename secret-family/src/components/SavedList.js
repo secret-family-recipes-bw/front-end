@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { RecipeContext } from "../context/RecipeContext";
 
-function SavedList({ list }) {
+function SavedList() {
+    const {savedList} = useContext(RecipeContext);
   return (
     <div className="saved-list">
       <h3>Saved Recipes:</h3>
-      {list.map(recipe => {
+      {savedList.map(recipe => {
           console.log("title   ldjafsk ", recipe)
         return (
           <NavLink

@@ -11,6 +11,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import PrivateRoute from "./components/PrivateRoute";
 import axiosWithAuth from "./utils/axiosWithAuth";
+import { RecipeContext } from "./context/RecipeContext"
 
 
 const App = () => {
@@ -65,39 +66,32 @@ const App = () => {
 
   return (
     <div className="App">
-      <Route path='/signup' component={Signup}></Route>
-      <Route path='/login' component={Login}></Route>
+      <RecipeContext.Provider value={{filteredRecipes, searchText, savedList, changeSearchText, clearFilter, recipeList, addToSavedList, isInSavedList, removeFromSavedList}}>
+        <Route path='/signup' component={Signup}></Route>
+        <Route path='/login' component={Login}></Route>
 
-      <PrivateRoute exact path="/">
-        <SavedList list={savedList} />
-        <Search 
-          searchText={searchText} 
-          changeSearchText={changeSearchText} 
-          clearFilter={clearFilter}  
-        />
-        <RecipeList recipes={filteredRecipes} />
-        <Link to="/add-recipe"><button>Add Recipe</button></Link>
-      </PrivateRoute>
+        <PrivateRoute exact path="/">
+          <SavedList />
+          <Search />
+          <RecipeList />
+          <Link to="/add-recipe"><button>Add Recipe</button></Link>
+        </PrivateRoute>
 
-      <Route path="/add-recipe">
-        <SavedList list={savedList} />
-        <AddRecipe />
-      </Route> 
-      
-      <Route path="/recipes/:id">
-        <SavedList list={savedList} />
-        <Recipe 
-          recipes={recipeList} 
-          addToSavedList={addToSavedList} 
-          isInSavedList={isInSavedList}
-          removeFromSavedList={removeFromSavedList} 
-        />
-      </Route>
+        <Route path="/add-recipe">
+          <SavedList />
+          <AddRecipe />
+        </Route> 
+        
+        <Route path="/recipes/:id">
+          <SavedList />
+          <Recipe />
+        </Route>
 
-      <Route path="/update-recipe/:id">
-        <SavedList list={savedList} />
-        <UpdateRecipe />
-      </Route> 
+        <Route path="/update-recipe/:id">
+          <SavedList />
+          <UpdateRecipe />
+        </Route> 
+      </RecipeContext.Provider>
     </div>
   );
 };

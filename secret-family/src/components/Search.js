@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RecipeContext } from "../context/RecipeContext";
 
-function Search(props) {
+function Search() {
+    const {searchText, changeSearchText, clearFilter} = useContext(RecipeContext);
     return (
         <div>
             <input 
                 type="text" 
-                value={props.searchText} 
-                onChange={props.changeSearchText} 
+                value={searchText} 
+                onChange={changeSearchText} 
                 placeholder="Enter search term"
             />
-            <button onClick={props.clearFilter}>Clear Filter</button>
+            <button onClick={clearFilter}>Clear Filter</button>
         </div>
     )
 }
