@@ -1,50 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useParams, useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialRecipe = {
+    user_id: 1,
     title: "", 
-    ingredients: "",
-    instructions: "",
+    source: "",
+    category: "",
     image: "",
 };
 
 const AddRecipe = () => {
 //   const params = useParams();
-  const { push, location } = useHistory();
+  const { push } = useHistory();
   const [recipe, setRecipe] = useState(initialRecipe);
+  
 
-
-//   useEffect(() => {
-//     if (location.state) {
-//       setRecipe(location.state);
-//     } else {
-//       axios
-//         .get(`http://localhost:5000/api/movies/${params.id}`)
-//         .then(res => {
-//             console.log("data", res.data) 
-//             setRecipe(res.data)
-//         })
-//         .catch(err => console.log(err));
-//     }
-//   }, []);
-
+ 
   const changeHandler = ev => {
     ev.persist();
     let value = ev.target.value;
 
     setRecipe({
       ...recipe,
-      [ev.target.name]: value
-    });
+        [ev.target.name]: value
+      }
+    );
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    // axios
-    //   .put(`http://localhost:5000/api/movies/${recipe.id}`, recipe)
-    //   .then(() => push("/"))
-    //   .catch(err => console.log(err));
+    console.log(recipe)
+    axiosWithAuth()
+      .post("https://secret-family-recipes-2-api.herokuapp.com/recipes/addrecipe", recipe)
+      .then(() => push("/"))
+      .catch(err => console.log(err));
   };
 
   return (
@@ -57,20 +47,6 @@ const AddRecipe = () => {
           onChange={changeHandler}
           placeholder="Recipe Name"
           value={recipe.title}
-        />
-        <textarea
-          type="text"
-          name="ingredients"
-          onChange={changeHandler}
-          placeholder="Ingredients"
-          value={recipe.ingredients}
-        />
-        <textarea
-          type="text"
-          name="instructions"
-          onChange={changeHandler}
-          placeholder="Instructions"
-          value={recipe.instructions}
         />
         <button>Submit</button>
       </form>

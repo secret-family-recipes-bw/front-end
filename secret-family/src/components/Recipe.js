@@ -1,59 +1,62 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
-import recipeData from "../FakeData/recipeData";
+import { RecipeContext } from "../context/RecipeContext";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
-function Recipe({ addToSavedList, recipes, isInSavedList, removeFromSavedList }) {
-  const { push } = useHistory();
-  const { id } = useParams();
-  const recipe = recipes.find(recipe => recipe.id == id);
-  const saved = isInSavedList(recipe);
 
-//   const fetchRecipe = (id) => {
-//     axios
-//       .get(`http://localhost:5000/api/movies/${id}`)
-//       .then((res) => setRecipe(res.data))
-//       .catch((err) => console.log(err.response));
-//   };
+function Recipe() {
+    const {addToSavedList, isInSavedList, removeFromSavedList} = useContext(RecipeContext);
+    const { push } = useHistory();
+    const { id } = useParams();
+    const [recipe, setRecipe] = useState();
+    const saved = isInSavedList(recipe);
 
-  const toggleSaveRecipe = () => {
-    saved ? removeFromSavedList(recipe) : addToSavedList(recipe);
-  };
 
-//   useEffect(() => {
-//     fetchRecipe(params.id);
-//   }, [params.id]);
+    const toggleSaveRecipe = () => {
+        saved ? removeFromSavedList(recipe) : addToSavedList(recipe);
+    };
 
-  if (!recipe) {
-    return <div>Loading recipe information...</div>;
-  }
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${id}`)
+        .then((res) => {
+            setRecipe(res.data)
+            console.log("data", res.data)
+            })
+        .catch((err) => console.log(err.response));
+    }, [id]);
 
-  const handleDelete = e => {
-    e.preventDefault();
-    axios
-      .delete(`http://localhost:5000/api/movies/${recipe.id}`)
-      .then(() => {
-        push("/");
-      })
-      .catch(err => console.log(err));
-  };
+    if (!recipe) {
+        return <div>Loading recipe information...</div>;
+    }
 
-  return (
-    <div className="save-wrapper">
-      <RecipeCard recipe={recipe} />
+    const handleDelete = e => {
+        e.preventDefault();
+        axiosWithAuth()
+        .delete(`https://secret-family-recipes-2-api.herokuapp.com/recipes/${id}`)
+        .then((res) => {
+            console.log("res for delete:", res)
+            push("/");
+        })
+        .catch(err => console.log(err));
+    };
 
-      <button className="save-button" onClick={toggleSaveRecipe}>
-        {saved ? "remove from saved" : "Save"}
-      </button>
-      <button onClick={handleDelete}>
-          Delete
-      </button>
-      <Link to={`/update-movie/${recipe.id}`}>
-        <button>Edit</button>
-      </Link>
-    </div>
-  );
+    return (
+        <div className="save-wrapper">
+        <RecipeCard recipe={recipe} />
+
+        <button className="save-button" onClick={toggleSaveRecipe}>
+            {saved ? "remove from saved" : "Save"}
+        </button>
+        <button onClick={handleDelete}>
+            Delete
+        </button>
+        <Link to={`/update-recipe/${recipe.recipe.id}`}>
+            <button>Edit</button>
+        </Link>
+        </div>
+    );
 }
 
 export default Recipe;
