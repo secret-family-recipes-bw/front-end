@@ -3,27 +3,35 @@ import loginSchema from './LoginSchema';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
+import '../index.css';
 
 const LBackgroundDiv = styled.div`
     background-image: url('https://images.unsplash.com/reserve/EnF7DhHROS8OMEp2pCkx_Dufer%20food%20overhead%20hig%20res.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1957&q=80');
     background-position: no-repeat;
     background-size: cover;
+    height: 100vh;
+    width: 100vw;
 `;
 const LFormDiv = styled.div`
-    padding: 19% 20% 15% 15%;
+    padding: 15% 20% 12% 15%;
 `;
 const LForm = styled.form`
     background: white;
-    width: 20%;
+    width: 25%;
     text-align: center;
-    padding: 2% 3% 4% 3%;
+    padding: 4% 3% 1% 3%;
     background: #FFF8D7;
+    height: 35rem;
 `;
 const LButton = styled.button`
     width: 55%;
+    margin-top: 1rem;
 `;
 
 const Login = props => {
+
+    const lHistory = useHistory();
 
     const [ validLForm, setValidLForm ] = useState({
         username:'',
@@ -34,23 +42,6 @@ const Login = props => {
         password:''
     })
     const [ lDisabled, setLDisabled ] = useState(false);
-
-    useEffect(() => {
-        loginSchema.isValid(validLForm).then(valid => {
-            setLDisabled(!valid)
-        })
-    },[validLForm])
-
-    const lSubmit = e => {
-        e.preventDefault();
-        
-        axiosWithAuth()
-        .post('/auth/login', validLForm)
-        .then(res => {
-            window.localStorage.setItem('token')
-
-        })
-    }
 
     const lFormState = e => {
         const lName = e.target.name;
@@ -74,24 +65,44 @@ const Login = props => {
             ...validLForm, [lName]: lValue
         })
     }
-    
+    useEffect(() => {
+        loginSchema.isValid(validLForm).then(valid => {
+            setLDisabled(!valid)
+        })
+    },[validLForm])
+
+    const lSubmit = e => {
+        e.preventDefault();
+        console.log(validLForm)
+        
+        axiosWithAuth()
+        .post('/auth/login', validLForm)
+        .then(res => {
+            window.localStorage.setItem('token', res.data.token);
+            lHistory.push('/')  
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
 
     return (
         <LBackgroundDiv>
             <LFormDiv>
                 <LForm onSubmit={lSubmit}>
                     <h1>
-                        Login
+                        Login<br />
                     </h1>
                     <label htmlFor='username'>
                         Username:<br />
-                        <input name='username' type='text' onChange={lFormState}/>
-                        {validLForm.username.length < 2 ? (<p className="error">{lErrors.username}</p>) : ''}<br /><br />
+                        <input name='username' type='text' onChange={lFormState}/><br />
+                        {validLForm.username.length < 2 ? (<p className="error">{lErrors.username}</p>) : ''}<br />
                     </label>
                     <label htmlFor='password'>
                         Password:<br />
-                        <input name='password' type='text' onChange={lFormState} /><br /><br /><br />
-                        {validLForm.password.length < 2 ? (<p className="error">{lErrors.password}</p>) : ''}<br /><br />
+                        <input name='password' type='text' onChange={lFormState} /><br />
+                        {validLForm.password.length < 2 ? (<p className="error">{lErrors.password}</p>) : ''}<br />
                     </label>
                     <LButton disabled={lDisabled}>Login</LButton>
                 </LForm>
