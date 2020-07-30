@@ -3,11 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialRecipe = {
+  recipe: {
     user_id: 1,
     title: "", 
     source: "",
     category: "",
     image: "",
+  }
 };
 
 
@@ -46,7 +48,6 @@ const UpdateRecipe = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(recipe)
     axiosWithAuth()
       .put(`https://secret-family-recipes-2-api.herokuapp.com/recipes/updaterecipe/${id}`, recipe.recipe)
       .then(() => push("/"))
@@ -62,7 +63,7 @@ const UpdateRecipe = () => {
           name="title"
           onChange={changeHandler}
           placeholder="Recipe Name"
-          value={recipe.title}
+          value={recipe.recipe.title}
         />
         {/* <textarea
           type="text"
