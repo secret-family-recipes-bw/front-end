@@ -29,17 +29,20 @@ const Nav = props => {
                 Secret Family Recipes
             </LogoText>
             <NavLinks>
-                <NavLink
-                    to="/"
-                    exact
-                    className='linkText'>
+                <a href="https://secret-family-recipes-for-all.netlify.app/index.html"
+                    style={{
+                        textDecoration: 'none',
+                        color:'#F3E0DC'
+                    }}>
                     Home
-                </NavLink>
-                <NavLink
-                    to="/about"
-                    className='linkText'>
+                </a>
+                <a href="https://secret-family-recipes-for-all.netlify.app/about.html"
+                    style={{
+                        textDecoration: 'none',
+                        color:'#F3E0DC'
+                    }}>
                     About
-                </NavLink>
+                </a>
                 <NavLink
                     to="/recipes"
                     className='linkText'>

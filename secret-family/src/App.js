@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Route, useHistory, Link } from "react-router-dom";
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Route } from "react-router-dom";
 
 import SavedList from "./components/SavedList";
-import RecipeList from "./components/RecipesList";
 import Recipe from "./components/Recipe";
 import UpdateRecipe from "./components/UpdateRecipe";
-import Search from "./components/Search";
 // import axios from 'axios';
 import AddRecipe from "./components/AddRecipe";
 import Signup from './components/Signup';
@@ -14,22 +11,14 @@ import Login from './components/Login';
 import Nav from './components/Nav'
 
 import PrivateRoute from "./components/PrivateRoute";
-import axiosWithAuth from "./utils/axiosWithAuth";
 import { RecipeContext } from "./context/RecipeContext"
+import Home from "./components/Home";
 
-const Button = styled.button `
-  font-size: 0.75em;
-  margin: 0.5em;
-  padding: 0.5em;
-  border: 1px solid black;
-  border-radius: 3px;
-`
 const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const { location } = useHistory();
 
   const addToSavedList = recipe => {
     setSavedList([...savedList, recipe]);
@@ -43,17 +32,11 @@ const App = () => {
     return recipe && savedList.find(savedRecipe => recipe.recipe.id === savedRecipe.recipe.id) !== undefined;
   }
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get("/recipes")
-      .then(res => {
-        console.log(res)
-        setRecipeList(res.data)
-        const recipes = filterRecipes(res.data, searchText)
-        setFilteredRecipes(recipes)
-      } )
-      .catch(err => console.log(err.response));
-  }, [searchText, location]);
+  const updateRecipes = newRecipes => {
+    setRecipeList(newRecipes)
+    const recipes = filterRecipes(newRecipes, searchText)
+    setFilteredRecipes(recipes)
+  }
 
   const filterRecipes = (recipes, searchText) => {
     console.log("search text kldsjlkfajdkljfsalk", searchText)
@@ -72,18 +55,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <RecipeContext.Provider value={{filteredRecipes, searchText, savedList, changeSearchText, clearFilter,
-         recipeList, addToSavedList, isInSavedList, removeFromSavedList}}>
+      <RecipeContext.Provider value={{filteredRecipes, searchText, savedList, changeSearchText, clearFilter, recipeList, addToSavedList, isInSavedList, removeFromSavedList, updateRecipes}}>
         <Nav />
         <Route path='/signup' component={Signup}></Route>
         <Route path='/login' component={Login}></Route>
 
-        <PrivateRoute exact path="/">
-          <SavedList />
-          <Search />
-          <RecipeList />
-          <Link to="/add-recipe"><Button>Add Recipe</Button></Link>
-        </PrivateRoute>
+        <PrivateRoute exact path="/" component={Home} />
 
         <Route path="/add-recipe">
           <SavedList />
