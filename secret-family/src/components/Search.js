@@ -22,6 +22,14 @@ const SearchInput = styled.input `
     border-radius: 3px;
 `;
 
+const Button = styled.button `
+    font-size: 0.75em;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 1px solid black;
+    border-radius: 3px;
+`
+
 function Search() {
     const {searchText, changeSearchText, clearFilter} = useContext(RecipeContext);
     return (
@@ -32,7 +40,7 @@ function Search() {
                 onChange={changeSearchText} 
                 placeholder="Enter search term"
             />
-            <button onClick={clearFilter}>Clear Filter</button>
+            <Button onClick={clearFilter}>Clear Filter</Button>
         </SearchDiv>
     )
 }
