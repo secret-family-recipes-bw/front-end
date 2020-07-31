@@ -11,6 +11,7 @@ const RecipeCardDiv = styled.div `
     position: relative;
     margin: 1rem auto;
     width: 75%;
+    text-align: left;
     display: flex;
     align-items: center;
     flex-direction: column;
