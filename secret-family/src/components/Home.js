@@ -30,12 +30,12 @@ const Home = () => {
       }, [location]);
 
     return (
-        <>
+        <div style={{textAlign: "center"}}>
             <SavedList />
             <Search />
             <RecipeList />
             <Link to="/add-recipe"><Button>Add Recipe</Button></Link>
-        </>
+        </div>
     )
 };
 

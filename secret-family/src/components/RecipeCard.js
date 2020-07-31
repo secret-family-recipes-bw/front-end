@@ -1,9 +1,26 @@
 import React from 'react';
+import styled from 'styled-components';
+
+
+const RecipeCardDiv = styled.div `
+    background-color: #D4A59A;
+    border: 0;
+    box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.24);
+    padding: 1rem;
+    position: relative;
+    margin: 1rem auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+`;
 
 const RecipeCard = props => {
   const { recipe, instructions } = props.recipe;
   return (
-    <div className="recipe-card">
+    <RecipeCardDiv>
         <h2>{recipe.title}</h2>
         <div className="recipe-ingredients">
             <h3>Ingredients:</h3> 
@@ -19,7 +36,7 @@ const RecipeCard = props => {
                 })}
             </ol>
         </div>
-    </div>
+    </RecipeCardDiv>
   );
 };
 

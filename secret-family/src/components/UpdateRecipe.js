@@ -1,6 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import styled from 'styled-components';
+
+
+const UpdateRecipeDiv = styled.div `
+    background-color: #D4A59A;
+    border: 0;
+    box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.24);
+    padding: 1rem;
+    position: relative;
+    margin: 1rem auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+const UpdateInput = styled.input `
+    padding: 0.5em;
+    margin: 0.5em;
+    background: papayawhip;
+    border: none;
+    border-radius: 3px;
+`;
+
+const Button = styled.button `
+    font-size: 0.75em;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 1px solid black;
+    border-radius: 3px;
+`;
 
 const initialRecipe = {
   recipe: {
@@ -55,10 +88,10 @@ const UpdateRecipe = () => {
   };
 
   return (
-    <div>
+    <UpdateRecipeDiv>
       <h2>Update Recipe</h2>
       <form onSubmit={handleSubmit}>
-        <input
+        <UpdateInput
           type="text"
           name="title"
           onChange={changeHandler}
@@ -79,9 +112,9 @@ const UpdateRecipe = () => {
           placeholder="Instructions"
           value={recipe.instructions}
         /> */}
-        <button>Update</button>
+        <Button>Update</Button>
       </form>
-    </div>
+    </UpdateRecipeDiv>
   );
 };
 
