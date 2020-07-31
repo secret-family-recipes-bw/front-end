@@ -3,6 +3,16 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import { RecipeContext } from "../context/RecipeContext";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import styled from 'styled-components';
+
+
+const Button = styled.button `
+    font-size: 0.75em;
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 1px solid black;
+    border-radius: 3px;
+`;
 
 
 function Recipe() {
@@ -43,18 +53,18 @@ function Recipe() {
     };
 
     return (
-        <div className="save-wrapper">
-        <RecipeCard recipe={recipe} />
+        <div style={{textAlign: "center"}}>
+            <RecipeCard recipe={recipe} />
 
-        <button className="save-button" onClick={toggleSaveRecipe}>
-            {saved ? "remove from saved" : "Save"}
-        </button>
-        <button onClick={handleDelete}>
-            Delete
-        </button>
-        <Link to={`/update-recipe/${recipe.recipe.id}`}>
-            <button>Edit</button>
-        </Link>
+            <Button onClick={toggleSaveRecipe}>
+                {saved ? "remove from saved" : "Save"}
+            </Button>
+            <Button onClick={handleDelete}>
+                Delete
+            </Button>
+            <Link to={`/update-recipe/${recipe.recipe.id}`}>
+                <Button>Edit</Button>
+            </Link>
         </div>
     );
 }
