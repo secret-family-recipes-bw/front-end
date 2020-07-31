@@ -60,7 +60,7 @@ const Nav = () => {
                     About
                 </NavLinks>
                 <StyledNavLink
-                    to="/recipes"
+                    to="/"
                     className='linkText'  
                     style={{
                         textDecoration: 'none',

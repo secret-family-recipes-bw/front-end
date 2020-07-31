@@ -16,6 +16,15 @@ const SavedListDiv = styled.div `
     align-items: center;
     justify-content: space-between;
 `;
+const StyledLink = styled(Link)`
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    color: #BC4639;
+    font-size: 1rem;
+    padding: .5rem;
+    text-decoration: none;
+`;
 
 function SavedList() {
     const {savedList} = useContext(RecipeContext);
@@ -25,17 +34,17 @@ function SavedList() {
       {savedList.map(recipe => {
           console.log("title   ldjafsk ", recipe)
         return (
-          <NavLink
+          <StyledLink
             to={`/recipes/${recipe.recipe.id}`}
             key={recipe.recipe.id}
             activeClassName="saved-active"
           >
             <span className="saved-movie">{recipe.recipe.title}</span>
-          </NavLink>
+          </StyledLink>
         );
       })}
       <div className="home-button">
-        <Link to="/">Home</Link>
+        <StyledLink to="/" style={{color: "black"}}>Home</StyledLink>
       </div>
     </SavedListDiv>
   );
