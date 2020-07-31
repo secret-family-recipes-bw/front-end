@@ -6,7 +6,7 @@ const NavBar = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 0 1%;
+    padding: 1%;
     background: #420D09;
 `;
 const LogoText = styled.h1`
@@ -15,50 +15,78 @@ const LogoText = styled.h1`
     font-size: 3rem;
     margin: 0.3%;
 `;
-const NavLinks = styled.div`
-    display: flex;
-    width: 18%;
-    justify-content: space-between;
+const NavLinks = styled.a`
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    color: #D4A59A;
+    font-size: 1rem;
+    margin: .5rem;
+    padding: 1rem;
+    width: 10%;
+    /* justify-content: space-evenly; */
+`;
+const StyledNavLink = styled(NavLink)`
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    color: #D4A59A;
+    font-size: 1rem;
+    margin: .5rem;
+    padding: 1rem;
+    width: 10%;
 `;
 
-const Nav = props => {
+const Nav = () => {
     
     return (
         <NavBar>
             <LogoText>
                 Secret Family Recipes
             </LogoText>
-            <NavLinks>
-                <a href="https://secret-family-recipes-for-all.netlify.app/index.html"
+            <div>
+                <NavLinks href="https://secret-family-recipes-for-all.netlify.app/index.html"
                     style={{
                         textDecoration: 'none',
                         color:'#F3E0DC'
                     }}>
                     Home
-                </a>
-                <a href="https://secret-family-recipes-for-all.netlify.app/about.html"
+                </NavLinks>
+                <NavLinks href="https://secret-family-recipes-for-all.netlify.app/about.html"
                     style={{
                         textDecoration: 'none',
                         color:'#F3E0DC'
                     }}>
                     About
-                </a>
-                <NavLink
+                </NavLinks>
+                <StyledNavLink
                     to="/recipes"
-                    className='linkText'>
+                    className='linkText'  
+                    style={{
+                        textDecoration: 'none',
+                        color:'#F3E0DC'
+                    }}>
                     Recipes
-                </NavLink>
-                <NavLink
+                </StyledNavLink>
+                <StyledNavLink
                     to="/login"
-                    className='linkText'>
+                    className='linkText'
+                    style={{
+                        textDecoration: 'none',
+                        color:'#F3E0DC'
+                    }}>
                     Login
-                </NavLink>
-                <NavLink
+                </StyledNavLink>
+                <StyledNavLink
                     to="/signup"
-                    className='linkText'>
+                    className='linkText'
+                    style={{
+                        textDecoration: 'none',
+                        color:'#F3E0DC'
+                    }}>
                     Register
-                </NavLink>
-            </NavLinks>
+                </StyledNavLink>
+            </div>
         </NavBar>
     )
 }
