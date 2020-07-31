@@ -18,6 +18,15 @@ const RecipeListDiv = styled.div `
     flex-direction: column;
     justify-content: space-between;
 `;
+const StyledLink = styled(Link)`
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    color: #420D09;
+    font-size: 1rem;
+    padding: .5rem;
+    text-decoration: none;
+`;
 
 
 function RecipeList() {
@@ -26,9 +35,9 @@ function RecipeList() {
     <RecipeListDiv>
       {
         filteredRecipes.map(recipe => (
-          <Link key={recipe.id} to={`/recipes/${recipe.id}`}>
+          <StyledLink key={recipe.id} to={`/recipes/${recipe.id}`}>
             <h2>{recipe.title}</h2>
-          </Link>
+          </StyledLink>
         ))
       }
     </RecipeListDiv>
